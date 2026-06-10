@@ -1,0 +1,8 @@
+{
+  "name": "wuffi-docs",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "marked": "^15.0.0"
+  }
+}

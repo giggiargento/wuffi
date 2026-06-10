@@ -1,0 +1,223 @@
+{
+  "tabs": {
+    "home": "Home",
+    "explore": "Explore",
+    "add": "Add",
+    "alerts": "Alerts",
+    "profile": "Profile"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "save": "Save",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "done": "Done",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "seeAll": "See all",
+    "noResults": "No results",
+    "required": "Required field"
+  },
+  "auth": {
+    "login": "Sign in",
+    "register": "Create account",
+    "logout": "Sign out",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "displayName": "Name",
+    "forgotPassword": "Forgot password?",
+    "resetPassword": "Reset password",
+    "resetSent": "We sent you an email to reset your password",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "welcomeTitle": "Welcome to WUFFI!",
+    "welcomeSubtitle": "Your digital pet notebook and caring community",
+    "loginError": "Could not sign in. Check your credentials.",
+    "registerError": "Could not create your account.",
+    "passwordsMustMatch": "Passwords do not match"
+  },
+  "home": {
+    "greeting": "Hi, {{name}}!",
+    "greetingGuest": "Hi!",
+    "myPets": "My pets",
+    "quickActionsTitle": "Quick actions",
+    "nearbyAlerts": "Nearby alerts",
+    "recentFavorites": "Recent favorites",
+    "empty": {
+      "title": "You don't have pets yet",
+      "subtitle": "Start by adding your furry friend to your digital notebook",
+      "cta": "Add pet"
+    },
+    "quickActions": {
+      "addPet": "Add pet",
+      "reportLost": "Report lost",
+      "addFound": "Found pet",
+      "addAdoption": "Post adoption",
+      "addTransit": "Temporary transit"
+    }
+  },
+  "explore": {
+    "title": "Explore",
+    "lost": "Lost",
+    "found": "Found",
+    "adoption": "Adoption",
+    "transit": "Transit",
+    "list": "List",
+    "map": "Map",
+    "filters": "Filters",
+    "searchPlaceholder": "Search by name, city or neighborhood",
+    "empty": "No posts in this category",
+    "applyFilters": "Apply filters",
+    "clearFilters": "Clear filters",
+    "province": "Province",
+    "city": "City",
+    "neighborhood": "Neighborhood",
+    "species": "Species"
+  },
+  "case": {
+    "contact": {
+      "whatsapp": "Contact via WhatsApp",
+      "call": "Call",
+      "share": "Share",
+      "title": "Contact"
+    },
+    "status": {
+      "active": "Active",
+      "sighted": "Sighted",
+      "found": "Found",
+      "closed": "Closed",
+      "looking_for_owner": "Looking for owner",
+      "reunited": "Reunited",
+      "available": "Available",
+      "reserved": "Reserved",
+      "adopted": "Adopted",
+      "seeking_home": "Seeking home",
+      "in_transit": "In transit",
+      "placed": "Placed"
+    },
+    "type": {
+      "lost": "Lost",
+      "found": "Found",
+      "adoption": "Adoption",
+      "transit": "Transit"
+    },
+    "location": "Location",
+    "description": "Description",
+    "details": "Details",
+    "reportSighting": "Report sighting",
+    "favorite": "Save",
+    "unfavorite": "Remove from saved"
+  },
+  "pet": {
+    "title": "Pet",
+    "info": "Information",
+    "health": "Health",
+    "photos": "Photos",
+    "reportLost": "Report as lost",
+    "species": {
+      "dog": "Dog",
+      "cat": "Cat",
+      "rabbit": "Rabbit",
+      "bird": "Bird",
+      "other": "Other"
+    },
+    "sex": {
+      "male": "Male",
+      "female": "Female",
+      "unknown": "Unknown"
+    },
+    "form": {
+      "name": "Name",
+      "species": "Species",
+      "breed": "Breed",
+      "sex": "Sex",
+      "ageMonths": "Age (months)",
+      "weightKg": "Weight (kg)",
+      "color": "Color",
+      "personality": "Personality",
+      "medicalNotes": "Medical notes",
+      "allergies": "Allergies (comma separated)",
+      "microchip": "Microchip / ID",
+      "addPhoto": "Add photo"
+    },
+    "createTitle": "New pet",
+    "editTitle": "Edit pet",
+    "created": "Pet created!",
+    "updated": "Pet updated",
+    "status": {
+      "safe": "Safe",
+      "lost": "Lost"
+    }
+  },
+  "create": {
+    "title": "What would you like to add?",
+    "personalPet": "My personal pet",
+    "personalPetDesc": "Private digital notebook for your companion",
+    "lostPet": "Lost pet",
+    "lostPetDesc": "Post an alert to help find them",
+    "foundPet": "Found pet",
+    "foundPetDesc": "Help reunite them with their family",
+    "adoption": "For adoption",
+    "adoptionDesc": "Find a responsible home",
+    "transit": "Temporary transit",
+    "transitDesc": "Temporary care while seeking a home",
+    "step": "Step {{current}} of {{total}}",
+    "publish": "Publish",
+    "published": "Post created!",
+    "caseTitle": "Post title",
+    "vaccinated": "Vaccinated",
+    "neutered": "Neutered",
+    "needsPermanentHome": "Seeking permanent home"
+  },
+  "profile": {
+    "title": "Profile",
+    "myPets": "My pets",
+    "myCases": "My posts",
+    "favorites": "Favorites",
+    "settings": "Settings",
+    "location": "Location",
+    "editProfile": "Edit profile",
+    "province": "Province",
+    "city": "City",
+    "neighborhood": "Neighborhood"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "empty": "You haven't saved any posts yet",
+    "emptySubtitle": "Explore cases and save the ones you care about"
+  },
+  "alerts": {
+    "title": "Alerts",
+    "empty": "No alerts for now",
+    "emptySubtitle": "We'll notify you when there's news nearby"
+  },
+  "map": {
+    "title": "Map",
+    "yourLocation": "Your location",
+    "permissionDenied": "We need location permission to show nearby alerts",
+    "webFallback": "Web view: use Expo Go on your phone for the full map"
+  },
+  "settings": {
+    "title": "Settings",
+    "account": "Account",
+    "notifications": "Notifications",
+    "language": "Language"
+  },
+  "errors": {
+    "firebaseNotConfigured": "Firebase is not configured. Add variables to .env",
+    "network": "Connection error. Try again.",
+    "unauthorized": "You need to sign in to continue"
+  },
+  "firebase": {
+    "setup": {
+      "missingEnv": "Missing variables in the project .env file:",
+      "seeDocs": "See docs/FIREBASE-SETUP.md to get values from Firebase Console."
+    }
+  }
+}

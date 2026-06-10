@@ -1,0 +1,223 @@
+{
+  "tabs": {
+    "home": "Inicio",
+    "explore": "Explorar",
+    "add": "Agregar",
+    "alerts": "Alertas",
+    "profile": "Perfil"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Algo salió mal",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "done": "Listo",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "search": "Buscar",
+    "seeAll": "Ver todo",
+    "noResults": "No hay resultados",
+    "required": "Campo obligatorio"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "register": "Crear cuenta",
+    "logout": "Cerrar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "displayName": "Nombre",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "resetPassword": "Restablecer contraseña",
+    "resetSent": "Te enviamos un correo para restablecer tu contraseña",
+    "noAccount": "¿No tenés cuenta?",
+    "hasAccount": "¿Ya tenés cuenta?",
+    "welcomeTitle": "¡Bienvenido a WUFFI!",
+    "welcomeSubtitle": "Tu cuaderno digital de mascotas y la comunidad que las cuida",
+    "loginError": "No pudimos iniciar sesión. Revisá tus datos.",
+    "registerError": "No pudimos crear tu cuenta.",
+    "passwordsMustMatch": "Las contraseñas no coinciden"
+  },
+  "home": {
+    "greeting": "¡Hola, {{name}}!",
+    "greetingGuest": "¡Hola!",
+    "myPets": "Mis mascotas",
+    "quickActionsTitle": "Acciones rápidas",
+    "nearbyAlerts": "Alertas cercanas",
+    "recentFavorites": "Guardados recientes",
+    "empty": {
+      "title": "Todavía no tenés mascotas",
+      "subtitle": "Empezá agregando a tu compañero peludo al cuaderno digital",
+      "cta": "Agregar mascota"
+    },
+    "quickActions": {
+      "addPet": "Agregar mascota",
+      "reportLost": "Reportar perdida",
+      "addFound": "Mascota encontrada",
+      "addAdoption": "Publicar adopción",
+      "addTransit": "Tránsito temporal"
+    }
+  },
+  "explore": {
+    "title": "Explorar",
+    "lost": "Perdidas",
+    "found": "Encontradas",
+    "adoption": "Adopción",
+    "transit": "Tránsito",
+    "list": "Lista",
+    "map": "Mapa",
+    "filters": "Filtros",
+    "searchPlaceholder": "Buscar por nombre, ciudad o barrio",
+    "empty": "No hay publicaciones en esta categoría",
+    "applyFilters": "Aplicar filtros",
+    "clearFilters": "Limpiar filtros",
+    "province": "Provincia",
+    "city": "Ciudad",
+    "neighborhood": "Barrio",
+    "species": "Especie"
+  },
+  "case": {
+    "contact": {
+      "whatsapp": "Contactar por WhatsApp",
+      "call": "Llamar",
+      "share": "Compartir",
+      "title": "Contacto"
+    },
+    "status": {
+      "active": "Activa",
+      "sighted": "Avistada",
+      "found": "Encontrada",
+      "closed": "Cerrada",
+      "looking_for_owner": "Buscando dueño",
+      "reunited": "Reunida",
+      "available": "Disponible",
+      "reserved": "Reservada",
+      "adopted": "Adoptada",
+      "seeking_home": "Busca hogar",
+      "in_transit": "En tránsito",
+      "placed": "Colocada"
+    },
+    "type": {
+      "lost": "Perdida",
+      "found": "Encontrada",
+      "adoption": "Adopción",
+      "transit": "Tránsito"
+    },
+    "location": "Ubicación",
+    "description": "Descripción",
+    "details": "Detalles",
+    "reportSighting": "Reportar avistamiento",
+    "favorite": "Guardar",
+    "unfavorite": "Quitar de guardados"
+  },
+  "pet": {
+    "title": "Mascota",
+    "info": "Información",
+    "health": "Salud",
+    "photos": "Fotos",
+    "reportLost": "Reportar como perdida",
+    "species": {
+      "dog": "Perro",
+      "cat": "Gato",
+      "rabbit": "Conejo",
+      "bird": "Ave",
+      "other": "Otro"
+    },
+    "sex": {
+      "male": "Macho",
+      "female": "Hembra",
+      "unknown": "Desconocido"
+    },
+    "form": {
+      "name": "Nombre",
+      "species": "Especie",
+      "breed": "Raza",
+      "sex": "Sexo",
+      "ageMonths": "Edad (meses)",
+      "weightKg": "Peso (kg)",
+      "color": "Color",
+      "personality": "Personalidad",
+      "medicalNotes": "Notas médicas",
+      "allergies": "Alergias (separadas por coma)",
+      "microchip": "Microchip / ID",
+      "addPhoto": "Agregar foto"
+    },
+    "createTitle": "Nueva mascota",
+    "editTitle": "Editar mascota",
+    "created": "¡Mascota creada!",
+    "updated": "Mascota actualizada",
+    "status": {
+      "safe": "Segura",
+      "lost": "Perdida"
+    }
+  },
+  "create": {
+    "title": "¿Qué querés agregar?",
+    "personalPet": "Mi mascota personal",
+    "personalPetDesc": "Cuaderno digital privado para tu compañero",
+    "lostPet": "Mascota perdida",
+    "lostPetDesc": "Publicar alerta para ayudar a encontrarla",
+    "foundPet": "Mascota encontrada",
+    "foundPetDesc": "Ayudá a reunirla con su familia",
+    "adoption": "En adopción",
+    "adoptionDesc": "Buscá un hogar responsable",
+    "transit": "Tránsito temporal",
+    "transitDesc": "Cuidado temporal mientras busca hogar",
+    "step": "Paso {{current}} de {{total}}",
+    "publish": "Publicar",
+    "published": "¡Publicación creada!",
+    "caseTitle": "Título de la publicación",
+    "vaccinated": "Vacunado/a",
+    "neutered": "Castrado/a",
+    "needsPermanentHome": "Busca hogar permanente"
+  },
+  "profile": {
+    "title": "Perfil",
+    "myPets": "Mis mascotas",
+    "myCases": "Mis publicaciones",
+    "favorites": "Favoritos",
+    "settings": "Ajustes",
+    "location": "Ubicación",
+    "editProfile": "Editar perfil",
+    "province": "Provincia",
+    "city": "Ciudad",
+    "neighborhood": "Barrio"
+  },
+  "favorites": {
+    "title": "Favoritos",
+    "empty": "Todavía no guardaste ninguna publicación",
+    "emptySubtitle": "Explorá casos y guardá los que te interesen"
+  },
+  "alerts": {
+    "title": "Alertas",
+    "empty": "No tenés alertas por ahora",
+    "emptySubtitle": "Te avisaremos cuando haya novedades cerca tuyo"
+  },
+  "map": {
+    "title": "Mapa",
+    "yourLocation": "Tu ubicación",
+    "permissionDenied": "Necesitamos permiso de ubicación para mostrarte alertas cercanas",
+    "webFallback": "Vista web: usá Expo Go en el celular para ver el mapa completo"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "account": "Cuenta",
+    "notifications": "Notificaciones",
+    "language": "Idioma"
+  },
+  "errors": {
+    "firebaseNotConfigured": "Firebase no está configurado. Agregá las variables en .env",
+    "network": "Error de conexión. Intentá de nuevo.",
+    "unauthorized": "Tenés que iniciar sesión para continuar"
+  },
+  "firebase": {
+    "setup": {
+      "missingEnv": "Faltan variables en el archivo .env del proyecto:",
+      "seeDocs": "Ver docs/FIREBASE-SETUP.md para obtener los valores desde Firebase Console."
+    }
+  }
+}
