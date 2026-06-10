@@ -57,6 +57,8 @@
       "subtitle": "Empezá agregando a tu compañero peludo al cuaderno digital",
       "cta": "Agregar mascota"
     },
+    "petsLoadError": "No pudimos cargar tus mascotas",
+    "petsLoadErrorSubtitle": "Revisá tu conexión e intentá de nuevo.",
     "quickActions": {
       "addPet": "Agregar mascota",
       "reportLost": "Reportar pérdida",
@@ -152,6 +154,16 @@
     "editTitle": "Editar mascota",
     "created": "¡Mascota creada!",
     "updated": "Mascota actualizada",
+    "saveError": "No pudimos guardar la mascota. Revisá tu conexión e intentá de nuevo.",
+    "delete": {
+      "action": "Eliminar mascota",
+      "confirmTitle": "¿Eliminar mascota?",
+      "confirmMessage": "Esta acción no se puede deshacer. Se borrará la mascota de tu cuaderno digital.",
+      "confirmMessageWithCases": "Esta acción no se puede deshacer. Se borrará la mascota de tu cuaderno digital, pero sus publicaciones públicas activas seguirán visibles ({{count}}).",
+      "confirmAction": "Eliminar",
+      "error": "No pudimos eliminar la mascota. Intentá de nuevo.",
+      "unauthorized": "Solo el dueño puede eliminar esta mascota."
+    },
     "status": {
       "safe": "Segura",
       "lost": "Perdida"

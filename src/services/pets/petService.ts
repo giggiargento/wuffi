@@ -8,7 +8,6 @@ import {
   deleteDoc,
   query,
   where,
-  orderBy,
   serverTimestamp,
   Timestamp,
 } from 'firebase/firestore';
@@ -71,11 +70,12 @@ export async function getPetsByOwner(ownerId: string): Promise<Pet[]> {
   if (!isFirebaseConfigured() || !db) return [];
   const q = query(
     collection(db, FIRESTORE_COLLECTIONS.pets),
-    where('ownerId', '==', ownerId),
-    orderBy('updatedAt', 'desc')
+    where('ownerId', '==', ownerId)
   );
   const snap = await getDocs(q);
-  return snap.docs.map((d) => firestoreToPet(d.id, d.data()));
+  return snap.docs
+    .map((d) => firestoreToPet(d.id, d.data()))
+    .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
 }
 
 export async function createPet(
@@ -132,8 +132,11 @@ export async function updatePet(
   return pet;
 }
 
-export async function deletePet(petId: string): Promise<void> {
+export async function deletePet(petId: string, ownerId: string): Promise<void> {
   if (!isFirebaseConfigured() || !db) throw new Error('Firestore not configured');
+  const pet = await getPet(petId);
+  if (!pet) throw new Error('Pet not found');
+  if (pet.ownerId !== ownerId) throw new Error('Unauthorized');
   await deleteDoc(doc(db, FIRESTORE_COLLECTIONS.pets, petId));
 }
 

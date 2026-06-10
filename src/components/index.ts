@@ -18,5 +18,6 @@ export { ScreenHeader } from './ui/ScreenHeader';
 export { LoadingSpinner } from './ui/LoadingSpinner';
 export { Screen } from './ui/Screen';
 export { SpeciesSelector, SpeciesBadge } from './ui/SpeciesSelector';
+export { ConfirmDialog, InlineError } from './ui/ConfirmDialog';
 export { theme } from './ui/theme';
 export { shadows } from './ui/shadows';

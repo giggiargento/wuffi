@@ -76,8 +76,12 @@ export default function CreatePersonalPetScreen() {
       });
       Alert.alert(t('pet.created'));
       router.replace(`/pet/${pet.id}`);
-    } catch {
-      Alert.alert(t('common.error'), t('common.error'));
+    } catch (error) {
+      const detail =
+        error instanceof Error && error.message !== 'Not authenticated'
+          ? error.message
+          : t('pet.saveError');
+      Alert.alert(t('common.error'), detail);
     }
   };
 

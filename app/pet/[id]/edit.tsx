@@ -11,12 +11,15 @@ import {
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import * as ImagePicker from 'expo-image-picker';
-import { Input, PrimaryButton, PetAgeInput, SpeciesSelector } from '@/components';
+import { Input, PrimaryButton, PetAgeInput, SpeciesSelector, Button, ConfirmDialog, InlineError } from '@/components';
 import { parsePetAgeInput, petSchema } from '@/schemas';
-import { usePet, useUpdatePet, useAddPetPhoto } from '@/hooks/usePets';
+import { usePet, useUpdatePet, useAddPetPhoto, useDeletePet } from '@/hooks/usePets';
+import { useMyCases } from '@/hooks/useCases';
+import { useAuthStore } from '@/stores/authStore';
 import { uploadFile, petPhotoPath } from '@/services/firebase/storage';
 import { DEFAULT_PET_SPECIES, SEX_OPTIONS } from '@/constants';
 import { monthsToAgeFields, MAX_PET_AGE_YEARS } from '@/utils/petAge';
+import { countActiveCasesForPet } from '@/utils/caseStatus';
 import type { PetSpecies, Sex } from '@/types';
 
 export default function EditPetScreen() {
@@ -26,6 +29,12 @@ export default function EditPetScreen() {
   const { data: pet } = usePet(id);
   const updatePet = useUpdatePet(id);
   const addPhoto = useAddPetPhoto(id);
+  const deletePetMutation = useDeletePet(id);
+  const { data: myCases } = useMyCases();
+  const currentUserId = useAuthStore((s) => s.firebaseUser?.uid);
+
+  const isOwner = Boolean(pet && currentUserId && pet.ownerId === currentUserId);
+  const activeLinkedCaseCount = myCases ? countActiveCasesForPet(myCases, id) : 0;
 
   const [name, setName] = useState('');
   const [species, setSpecies] = useState<PetSpecies>(DEFAULT_PET_SPECIES);
@@ -42,6 +51,8 @@ export default function EditPetScreen() {
   const [allergies, setAllergies] = useState('');
   const [microchipId, setMicrochipId] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!pet) return;
@@ -118,6 +129,47 @@ export default function EditPetScreen() {
       setLoading(false);
     }
   };
+
+  const performDelete = async () => {
+    if (!isOwner) {
+      setDeleteError(t('pet.delete.unauthorized'));
+      setShowDeleteConfirm(false);
+      return;
+    }
+
+    try {
+      setDeleteError(null);
+      setLoading(true);
+      await deletePetMutation.mutateAsync();
+      setShowDeleteConfirm(false);
+      router.replace('/(tabs)');
+    } catch (error) {
+      const detail =
+        error instanceof Error && error.message === 'Unauthorized'
+          ? t('pet.delete.unauthorized')
+          : t('pet.delete.error');
+      setDeleteError(detail);
+      setShowDeleteConfirm(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeletePress = () => {
+    setDeleteError(null);
+
+    if (!isOwner) {
+      setDeleteError(t('pet.delete.unauthorized'));
+      return;
+    }
+
+    setShowDeleteConfirm(true);
+  };
+
+  const deleteConfirmMessage =
+    activeLinkedCaseCount > 0
+      ? t('pet.delete.confirmMessageWithCases', { count: activeLinkedCaseCount })
+      : t('pet.delete.confirmMessage');
 
   const handleAddPhoto = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -224,8 +276,34 @@ export default function EditPetScreen() {
             className="mb-4"
           />
           <PrimaryButton title={t('common.save')} onPress={handleSave} loading={loading} />
+
+          {isOwner ? (
+            <>
+              <Button
+                title={t('pet.delete.action')}
+                variant="destructive"
+                onPress={handleDeletePress}
+                loading={deletePetMutation.isPending}
+                disabled={loading && !showDeleteConfirm}
+                className="mt-4 mb-8"
+              />
+              {deleteError ? <InlineError message={deleteError} className="mb-8" /> : null}
+            </>
+          ) : null}
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <ConfirmDialog
+        visible={showDeleteConfirm}
+        title={t('pet.delete.confirmTitle')}
+        message={deleteConfirmMessage}
+        confirmLabel={t('pet.delete.confirmAction')}
+        cancelLabel={t('common.cancel')}
+        destructive
+        loading={deletePetMutation.isPending}
+        onConfirm={performDelete}
+        onCancel={() => setShowDeleteConfirm(false)}
+      />
     </>
   );
 }

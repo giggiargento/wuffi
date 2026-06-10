@@ -57,6 +57,8 @@
       "subtitle": "Start by adding your furry friend to your digital notebook",
       "cta": "Add pet"
     },
+    "petsLoadError": "We couldn't load your pets",
+    "petsLoadErrorSubtitle": "Check your connection and try again.",
     "quickActions": {
       "addPet": "Add pet",
       "reportLost": "Report lost",
@@ -152,6 +154,16 @@
     "editTitle": "Edit pet",
     "created": "Pet created!",
     "updated": "Pet updated",
+    "saveError": "We couldn't save the pet. Check your connection and try again.",
+    "delete": {
+      "action": "Delete pet",
+      "confirmTitle": "Delete pet?",
+      "confirmMessage": "This action cannot be undone. The pet will be removed from your digital notebook.",
+      "confirmMessageWithCases": "This action cannot be undone. The pet will be removed from your digital notebook, but active public posts will remain visible ({{count}}).",
+      "confirmAction": "Delete",
+      "error": "We couldn't delete the pet. Please try again.",
+      "unauthorized": "Only the owner can delete this pet."
+    },
     "status": {
       "safe": "Safe",
       "lost": "Lost"

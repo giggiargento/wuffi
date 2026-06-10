@@ -7,7 +7,7 @@ import {
   deletePet,
   addPetPhoto,
 } from '@/services/pets/petService';
-import type { CreatePetInput, UpdatePetInput } from '@/types';
+import type { CreatePetInput, Pet, UpdatePetInput } from '@/types';
 import { useAuthStore } from '@/stores/authStore';
 
 export function usePets() {
@@ -37,8 +37,14 @@ export function useCreatePet() {
       if (!ownerId) throw new Error('Not authenticated');
       return createPet(ownerId, input);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['pets', ownerId] });
+    onSuccess: (pet) => {
+      queryClient.setQueryData(['pet', pet.id], pet);
+      queryClient.setQueryData<Pet[]>(['pets', ownerId], (existing) => {
+        const pets = existing ?? [];
+        if (pets.some((item) => item.id === pet.id)) return pets;
+        return [pet, ...pets];
+      });
+      void queryClient.invalidateQueries({ queryKey: ['pets', ownerId] });
     },
   });
 }
@@ -56,14 +62,21 @@ export function useUpdatePet(petId: string) {
   });
 }
 
-export function useDeletePet() {
+export function useDeletePet(petId: string) {
   const queryClient = useQueryClient();
   const ownerId = useAuthStore((s) => s.firebaseUser?.uid);
 
   return useMutation({
-    mutationFn: deletePet,
+    mutationFn: () => {
+      if (!ownerId) throw new Error('Not authenticated');
+      return deletePet(petId, ownerId);
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['pets', ownerId] });
+      queryClient.removeQueries({ queryKey: ['pet', petId] });
+      queryClient.setQueryData<Pet[]>(['pets', ownerId], (existing) =>
+        (existing ?? []).filter((item) => item.id !== petId)
+      );
+      void queryClient.invalidateQueries({ queryKey: ['pets', ownerId] });
     },
   });
 }

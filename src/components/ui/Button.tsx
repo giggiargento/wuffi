@@ -7,7 +7,7 @@ import {
 import { cn } from '@/utils/cn';
 import { shadows } from './shadows';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends TouchableOpacityProps {
@@ -24,6 +24,7 @@ const variantStyles: Record<ButtonVariant, { container: string; text: string }> 
   secondary: { container: 'bg-lavender', text: 'text-text font-semibold' },
   outline: { container: 'bg-card', text: 'text-text font-semibold' },
   ghost: { container: 'bg-transparent border-transparent', text: 'text-primary font-semibold' },
+  destructive: { container: 'bg-pink', text: 'text-text font-bold' },
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -47,6 +48,7 @@ export function Button({
   textClassName,
   disabled,
   style,
+  onPress,
   ...props
 }: ButtonProps) {
   const styles = variantStyles[variant];
@@ -64,6 +66,7 @@ export function Button({
       style={[showShadow ? shadows.soft : undefined, style]}
       disabled={disabled || loading}
       activeOpacity={0.85}
+      onPress={onPress}
       {...props}
     >
       {loading ? (

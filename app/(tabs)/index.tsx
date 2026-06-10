@@ -28,7 +28,12 @@ export default function HomeScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { userProfile } = useAuth();
-  const { data: pets, isLoading: petsLoading } = usePets();
+  const {
+    data: pets,
+    isLoading: petsLoading,
+    isError: petsError,
+    refetch: refetchPets,
+  } = usePets();
   const { data: nearbyCases } = useNearbyCases();
   const { data: favorites } = useFavorites();
 
@@ -54,6 +59,16 @@ export default function HomeScreen() {
         <SectionHeader title={t('home.myPets')} />
         {petsLoading ? (
           <LoadingSpinner />
+        ) : petsError ? (
+          <View className="mb-6">
+            <EmptyState
+              title={t('home.petsLoadError')}
+              subtitle={t('home.petsLoadErrorSubtitle')}
+              ctaLabel={t('common.retry')}
+              onCta={() => refetchPets()}
+              accent="pink"
+            />
+          </View>
         ) : pets && pets.length > 0 ? (
           pets.map((pet) => (
             <PetCard key={pet.id} pet={pet} onPress={() => router.push(`/pet/${pet.id}`)} />
