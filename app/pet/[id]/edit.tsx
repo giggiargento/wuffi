@@ -11,11 +11,12 @@ import {
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import * as ImagePicker from 'expo-image-picker';
-import { Input, PrimaryButton } from '@/components';
-import { petSchema } from '@/schemas';
+import { Input, PrimaryButton, PetAgeInput } from '@/components';
+import { parsePetAgeInput, petSchema } from '@/schemas';
 import { usePet, useUpdatePet, useAddPetPhoto } from '@/hooks/usePets';
 import { uploadFile, petPhotoPath } from '@/services/firebase/storage';
 import { SPECIES, SEX_OPTIONS } from '@/constants';
+import { monthsToAgeFields, MAX_PET_AGE_YEARS } from '@/utils/petAge';
 import type { Species, Sex } from '@/types';
 
 export default function EditPetScreen() {
@@ -31,7 +32,10 @@ export default function EditPetScreen() {
   const [breed, setBreed] = useState('');
   const [sex, setSex] = useState<Sex>('unknown');
   const [color, setColor] = useState('');
-  const [ageMonths, setAgeMonths] = useState('');
+  const [ageYears, setAgeYears] = useState('');
+  const [ageMonthsPart, setAgeMonthsPart] = useState('');
+  const [ageYearsError, setAgeYearsError] = useState<string>();
+  const [ageMonthsError, setAgeMonthsError] = useState<string>();
   const [weightKg, setWeightKg] = useState('');
   const [personalityNotes, setPersonalityNotes] = useState('');
   const [medicalNotes, setMedicalNotes] = useState('');
@@ -46,7 +50,9 @@ export default function EditPetScreen() {
     setBreed(pet.breed ?? '');
     setSex(pet.sex);
     setColor(pet.color ?? '');
-    setAgeMonths(pet.ageMonths?.toString() ?? '');
+    const ageFields = monthsToAgeFields(pet.ageMonths);
+    setAgeYears(ageFields.years);
+    setAgeMonthsPart(ageFields.months);
     setWeightKg(pet.weightKg?.toString() ?? '');
     setPersonalityNotes(pet.personalityNotes ?? '');
     setMedicalNotes(pet.medicalNotes ?? '');
@@ -55,13 +61,28 @@ export default function EditPetScreen() {
   }, [pet]);
 
   const handleSave = async () => {
+    setAgeYearsError(undefined);
+    setAgeMonthsError(undefined);
+
+    const ageResult = parsePetAgeInput(ageYears, ageMonthsPart);
+    if (!ageResult.success) {
+      const issue = ageResult.error.issues[0];
+      const message = t(`pet.age.errors.${issue.message}`, { maxYears: MAX_PET_AGE_YEARS });
+      if (issue.path[0] === 'ageMonthsPart') {
+        setAgeMonthsError(message);
+      } else {
+        setAgeYearsError(message);
+      }
+      return;
+    }
+
     const result = petSchema.safeParse({
       name,
       species,
       breed: breed || undefined,
       sex,
       color: color || undefined,
-      ageMonths: ageMonths ? Number(ageMonths) : undefined,
+      ageMonths: ageResult.data.ageMonths,
       weightKg: weightKg ? Number(weightKg) : undefined,
       personalityNotes: personalityNotes || undefined,
       medicalNotes: medicalNotes || undefined,
@@ -82,7 +103,7 @@ export default function EditPetScreen() {
         breed: breed || undefined,
         sex,
         color: color || undefined,
-        ageMonths: ageMonths ? Number(ageMonths) : undefined,
+        ageMonths: ageResult.data.ageMonths,
         weightKg: weightKg ? Number(weightKg) : undefined,
         personalityNotes: personalityNotes || undefined,
         medicalNotes: medicalNotes || undefined,
@@ -172,11 +193,13 @@ export default function EditPetScreen() {
           </View>
 
           <Input label={t('pet.form.color')} value={color} onChangeText={setColor} />
-          <Input
-            label={t('pet.form.ageMonths')}
-            value={ageMonths}
-            onChangeText={setAgeMonths}
-            keyboardType="numeric"
+          <PetAgeInput
+            years={ageYears}
+            months={ageMonthsPart}
+            onChangeYears={setAgeYears}
+            onChangeMonths={setAgeMonthsPart}
+            yearsError={ageYearsError}
+            monthsError={ageMonthsError}
           />
           <Input
             label={t('pet.form.weightKg')}

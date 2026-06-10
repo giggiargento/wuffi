@@ -10,10 +10,11 @@ import {
 } from 'react-native';
 import { useRouter, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Input, PrimaryButton } from '@/components';
-import { petSchema } from '@/schemas';
+import { Input, PrimaryButton, PetAgeInput } from '@/components';
+import { parsePetAgeInput, petSchema } from '@/schemas';
 import { useCreatePet } from '@/hooks/usePets';
 import { SPECIES, SEX_OPTIONS } from '@/constants';
+import { MAX_PET_AGE_YEARS } from '@/utils/petAge';
 import type { Species, Sex } from '@/types';
 
 export default function CreatePersonalPetScreen() {
@@ -26,17 +27,35 @@ export default function CreatePersonalPetScreen() {
   const [breed, setBreed] = useState('');
   const [sex, setSex] = useState<Sex>('unknown');
   const [color, setColor] = useState('');
-  const [ageMonths, setAgeMonths] = useState('');
+  const [ageYears, setAgeYears] = useState('');
+  const [ageMonthsPart, setAgeMonthsPart] = useState('');
+  const [ageYearsError, setAgeYearsError] = useState<string>();
+  const [ageMonthsError, setAgeMonthsError] = useState<string>();
   const [personalityNotes, setPersonalityNotes] = useState('');
 
   const handleCreate = async () => {
+    setAgeYearsError(undefined);
+    setAgeMonthsError(undefined);
+
+    const ageResult = parsePetAgeInput(ageYears, ageMonthsPart);
+    if (!ageResult.success) {
+      const issue = ageResult.error.issues[0];
+      const message = t(`pet.age.errors.${issue.message}`, { maxYears: MAX_PET_AGE_YEARS });
+      if (issue.path[0] === 'ageMonthsPart') {
+        setAgeMonthsError(message);
+      } else {
+        setAgeYearsError(message);
+      }
+      return;
+    }
+
     const result = petSchema.safeParse({
       name,
       species,
       breed: breed || undefined,
       sex,
       color: color || undefined,
-      ageMonths: ageMonths ? Number(ageMonths) : undefined,
+      ageMonths: ageResult.data.ageMonths,
       personalityNotes: personalityNotes || undefined,
     });
 
@@ -52,7 +71,7 @@ export default function CreatePersonalPetScreen() {
         breed: breed || undefined,
         sex,
         color: color || undefined,
-        ageMonths: ageMonths ? Number(ageMonths) : undefined,
+        ageMonths: ageResult.data.ageMonths,
         personalityNotes: personalityNotes || undefined,
       });
       Alert.alert(t('pet.created'));
@@ -106,11 +125,13 @@ export default function CreatePersonalPetScreen() {
           </View>
 
           <Input label={t('pet.form.color')} value={color} onChangeText={setColor} />
-          <Input
-            label={t('pet.form.ageMonths')}
-            value={ageMonths}
-            onChangeText={setAgeMonths}
-            keyboardType="numeric"
+          <PetAgeInput
+            years={ageYears}
+            months={ageMonthsPart}
+            onChangeYears={setAgeYears}
+            onChangeMonths={setAgeMonthsPart}
+            yearsError={ageYearsError}
+            monthsError={ageMonthsError}
           />
           <Input
             label={t('pet.form.personality')}

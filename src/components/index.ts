@@ -1,6 +1,7 @@
 export { Card } from './ui/Card';
 export { Button, PrimaryButton } from './ui/Button';
 export { Input } from './ui/Input';
+export { PetAgeInput } from './ui/PetAgeInput';
 export { Chip, ChipRow } from './ui/Chip';
 export { Badge, StatusBadge } from './ui/Badge';
 export { PetCard } from './ui/PetCard';

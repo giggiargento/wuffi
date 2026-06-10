@@ -14,6 +14,7 @@ import {
 } from '@/components';
 import { shadows } from '@/components';
 import { usePet } from '@/hooks/usePets';
+import { formatPetAge } from '@/utils/petAge';
 
 export default function PetDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -80,8 +81,8 @@ export default function PetDetailScreen() {
           <InfoChipGrid>
             {pet.ageMonths ? (
               <InfoChip
-                label={t('pet.form.ageMonths')}
-                value={pet.ageMonths}
+                label={t('pet.age.label')}
+                value={formatPetAge(t, pet.ageMonths) ?? ''}
                 icon="calendar-outline"
                 color="cream"
               />

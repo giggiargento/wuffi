@@ -142,7 +142,7 @@
       "species": "Especie",
       "breed": "Raza",
       "sex": "Sexo",
-      "ageMonths": "Edad (meses)",
+      "age": "Edad",
       "weightKg": "Peso (kg)",
       "color": "Color",
       "personality": "Personalidad",
@@ -159,9 +159,24 @@
       "safe": "Segura",
       "lost": "Perdida"
     },
+    "age": {
+      "label": "Edad",
+      "yearsLabel": "Años",
+      "monthsLabel": "Meses",
+      "years_one": "{{count}} año",
+      "years_other": "{{count}} años",
+      "months_one": "{{count}} mes",
+      "months_other": "{{count}} meses",
+      "yearsAndMonths": "{{years}} y {{months}}",
+      "errors": {
+        "invalidYears": "Ingresá un número válido de años (0–{{maxYears}}).",
+        "invalidMonthsPart": "Los meses deben ser entre 0 y 11.",
+        "ageRequired": "Ingresá al menos un año o un mes.",
+        "ageTooHigh": "La edad no puede superar {{maxYears}} años."
+      }
+    },
     "detail": {
       "colorValue": "Color: {{value}}",
-      "ageMonthsValue": "Edad (meses): {{value}}",
       "weightKgValue": "Peso (kg): {{value}}",
       "allergiesValue": "Alergias: {{value}}"
     }
